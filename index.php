@@ -29,14 +29,13 @@ session_start();
          PLANET
          <span style="color: hsl(218, 81%, 75%)">DEV</span>
        </h1>
-       <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">
-       Welcome to Planet.DEV, the premier community for developers who are passionate about staying on top of the latest trends and advancements in the world of development. Whether you're a seasoned pro or just starting out, our community is here to help you explore the latest news and technologies, connect with other like-minded developers, and stay ahead of the curve.
-Our community is built around the belief that by sharing knowledge and working together, we can all become better developers. That's why we offer a variety of resources and opportunities to help our members stay informed and engaged, including:
-  <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">✨ A lively forum where you can discuss the latest developments in your field and get feedback from other developers</p>
-  <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">✨ A calendar of upcoming events, including meetups, conferences, and webinars</p>
-  <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">✨ A blog featuring articles and tutorials on a wide range of development topics</p>
-  <p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">✨ Opportunities to connect with other developers in your area and around the world</p>
-<p class="mb-4 opacity-70" style="color: hsl(218, 81%, 85%)">We're excited to have you join our community and we look forward to helping you grow as a developer. Thanks for visiting Planet.DEV!</p>
+       <p class="mb-2 opacity-70" style="color: hsl(218, 81%, 85%)">
+       Welcome to Planet.DEV, the premier community for developers who are passionate about staying on top of the latest trends and advancements in the world of development. Our community is built around the belief that by sharing knowledge and working together. That's why we offer a variety of resources and opportunities to help our members, including:
+  <p class="mb-1 opacity-70" style="color: hsl(218, 81%, 85%)">✨ A lively forum where you can discuss the latest developments in your field and get feedback from other developers</p>
+  <p class="mb-1 opacity-70" style="color: hsl(218, 81%, 85%)">✨ A calendar of upcoming events, including meetups, conferences, and webinars</p>
+  <p class="mb-1 opacity-70" style="color: hsl(218, 81%, 85%)">✨ A blog featuring articles and tutorials on a wide range of development topics</p>
+  <p class="mb-1 opacity-70" style="color: hsl(218, 81%, 85%)">✨ Opportunities to connect with other developers in your area and around the world</p>
+<p class="mb-1 opacity-70" style="color: hsl(218, 81%, 85%)">We're excited to have you join our community and we look forward to helping you grow as a developer. Thanks for visiting Planet.DEV!</p>
        </p>
      </div>
 
