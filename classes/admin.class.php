@@ -17,7 +17,7 @@ class Admin  extends User {
     }
     public function delete_article($id) 
     {
-        $sql = "DELETE FROM article WHERE id = $id";
+        $sql = "DELETE FROM article WHERE id = '$id'";
         $stmt = $this->db->connect()->query($sql);
         header('location: dashboard.php');
         // $_SESSION['crud'] = "Book Deleted Successfully!!";

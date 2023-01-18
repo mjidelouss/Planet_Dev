@@ -8,11 +8,11 @@ $admin = new Admin;
 if (isset($_POST['save'])) {
     $admin->add_article($_POST['title'], $_POST['author'], $_POST['category'], $_POST['content'], $_POST['pubDate']);
 }
-if (isset($_POST['delid'])) {
-    $admin->delete_article($_POST['delid']);
-}
 if (isset($_POST['update'])) {
     $admin->update_article($_POST['articleId'], $_POST['newTitle'], $_POST['newAuthor'], $_POST['newContent'], $_POST['newCategory'], $_POST['newPubDate']);
+}
+if (isset($_POST['remove'])) {
+    $admin->delete_article($_POST['removee']);
 }
 ?>
 
@@ -43,10 +43,10 @@ if (isset($_POST['update'])) {
                     class=""></i>Planet <span style="color: hsl(218, 81%, 75%)">DEV</span>
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent active"><i
+                <a href="./dashboard.php" class="list-group-item list-group-item-action bg-transparent active"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"
-                    onclick="resetArticleForm()" data-bs-toggle="modal" data-bs-target="#modal-article"><i
+                <a href="./add_article.php" class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"
+                    onclick="resetArticleForm()"><i
                         class="fa fa-plus me-2 text-black"></i>Add Article</a>
                 <a href="./logout.php"
                     class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-danger"><i
@@ -122,7 +122,31 @@ if (isset($_POST['update'])) {
                             <tbody id="book-table">
                             <?php
                                 $article = new Article;
-                                $article->display_articles();
+                                $stmt = $article->display_articles();
+                                while ($row = $stmt->fetch()) 
+                                {
+                                    $article->id = "".$row["id"] ."";
+                                    $article->title = "".$row["title"]."";
+                                    $article->author = "".$row["author"]."";
+                                    $article->content = "".$row["content"]."";
+                                    $article->category = "".$row["category"]."";
+                                    $article->date = "".$row["published_date"]."";
+                                    echo '
+                                        <tr>
+                                        <th scope="row">'.$article->id.'</th>
+                                        <td>'.$article->title.'</td>
+                                        <td>'.$article->author.'</td>
+                                        <td>'.$article->content.'</td>
+                                        <td>'.$article->category.'</td>
+                                        <td>'.$article->date.'</td>
+                                        <td><button data-info="'.$article->title.','.$article->author.','.$article->content.','.$article->category.','.$article->date.'" class="rounded" data-bs-toggle="modal" data-bs-target="#modal-updateArt" id="'.$article->id.'" onclick="initArt('.$article->id.')"><i class="bi bi-pencil-square" style="color: green;"></i></button></td>
+                                        <form method="POST" action="">
+                                        <input type="hidden" name="removee" value="'.$article->id.'">
+                                        <td><button name="remove" type="submit" class="rounded"><i class="bi bi-trash-fill" style="color: red;"></i></button></td>
+                                        </form>
+                                        </tr>
+                                    ';
+                                }
                             ?>
                             </tbody>
                         </table>
