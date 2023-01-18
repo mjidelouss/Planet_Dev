@@ -9,37 +9,16 @@ class Article {
     public $category;
     public $date;
     public $db;
+    public $admin;
 
     public function __construct() {
         $this->db = new DbConnection;
+        $this->admin = new Admin;
     }
 
     public function display_articles() {
-        $sql="SELECT article.id, article.title, article.author, article.content, category.category AS Category , article.published_date FROM  article, category WHERE category.id = article.category_id";
+        $sql="SELECT article.id, article.title, article.author, article.content, category.category, article.published_date FROM  article, category WHERE category.id = article.category_id";
         $stmt = $this->db->connect()->query($sql);
-        while ($row = $stmt->fetch()) 
-        {
-            $this->id = "".$row["id"] ."";
-            $this->title = "".$row["title"]."";
-            $this->author = "".$row["author"]."";
-            $this->content = "".$row["content"]."";
-            $this->category = "".$row["Category"]."";
-            $this->date = "".$row["published_date"]."";
-            echo '
-                <tr>
-                <th scope="row">'.$this->id.'</th>
-                <td>'.$this->title.'</td>
-                <td>'.$this->author.'</td>
-                <td>'.$this->content.'</td>
-                <td>'.$this->category.'</td>
-                <td>'.$this->date.'</td>
-                <td><button data-info="'.$this->title.','.$this->author.','.$this->content.','.$this->category.','.$this->date.'" class="rounded" data-bs-toggle="modal" data-bs-target="#modal-updateArt" id="'.$this->id.'" onclick="initArt('.$this->id.')"><i class="bi bi-pencil-square" style="color: green;"></i></button></td>
-                <form action="" method="POST">
-                <input type="text" id="delid" name="delid" value="'.$this->id.'" style="display: none">
-                <td><button type="submit" class="rounded"><a href=""><i class="bi bi-trash-fill" style="color: red;"></i></a></button></td>
-                </form>
-                </tr>
-            ';
-        }
+        return $stmt;
     }
 }

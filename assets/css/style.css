@@ -11,6 +11,11 @@ body {
   backdrop-filter: saturate(200%) blur(25px);
 }
 
+.blog {
+  margin: 10px auto;
+  width: 88%;
+}
+
 section {
   height: 87.2vh;
 }

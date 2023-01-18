@@ -31386,6 +31386,14 @@ body div.DTCR_pointer {
 .flot-y-axis {
   fill: var(--app-component-color);
 }
+.dataTables_wrapper .dataTables_filter input {
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  padding: 5px;
+  background-color: transparent;
+  margin-left: 3px;
+  margin-bottom: 0.5rem;
+}
 .flot-tooltip {
   position: absolute;
   display: none;

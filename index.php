@@ -5,6 +5,9 @@ $user = new User;
 if (isset($_POST['login'])) {
   $user->login($_POST['email'], $_POST['password']);
 }
+if (isset($_SESSION['user'])) {
+  header("location: dashboard.php");
+}
 ?>
 
 <!DOCTYPE html>

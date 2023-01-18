@@ -40,4 +40,31 @@ class Admin  extends User {
         header('location: dashboard.php');
         // $_SESSION['crud'] = "Book Updated Successfully!!";
     }
+
+    public function article_status()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM article";
+        $stmt = $this->db->connect()->query($sql);
+        $row = $stmt->fetch();
+        $totalArticles = $row['total'];
+        return $totalArticles;
+    }
+
+    public function users_status()
+    {
+        $sql = "SELECT COUNT(*) AS total FROM adminusers WHERE role = 'user'";
+        $stmt = $this->db->connect()->query($sql);
+        $row = $stmt->fetch();
+        $totalUsers = $row['total'];
+        return $totalUsers;
+    }
+
+    public function authors_status()
+    {
+        $sql = "SELECT COUNT(DISTINCT author) AS total FROM article";
+        $stmt = $this->db->connect()->query($sql);
+        $row = $stmt->fetch();
+        $totalAuthors = $row['total'];
+        return $totalAuthors;
+    }
 }
