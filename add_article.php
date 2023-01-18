@@ -38,9 +38,9 @@ if (isset($_POST['save'])) {
                     class=""></i>Planet <span style="color: hsl(218, 81%, 75%)">DEV</span>
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="#" class="list-group-item list-group-item-action bg-transparent active"><i
+                <a href="./dashboard.php" class="list-group-item list-group-item-action bg-transparent active"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"
+                <a href="./add_article.php" class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"
                     onclick="resetArticleForm()" data-bs-toggle="modal" data-bs-target="#modal-article"><i
                         class="fa fa-plus me-2 text-black"></i>Add Article</a>
                 <a href="./logout.php"
@@ -61,8 +61,8 @@ if (isset($_POST['save'])) {
             <div class="conatiner-fluid blog">
                 <h4 class="text-center">Add Article</h4>
                 <form action="" method="POST">
-                    <input type="text" placeholder="Title..." class="form-control mb-2" name="title" required>
-                    <input type="text" placeholder="Author..." class="form-control mb-2" name="author" required />
+                    <input type="text" placeholder="Title" class="form-control mb-2" name="title" required>
+                    <input type="text" placeholder="Author" class="form-control mb-2" name="author" required />
                     <select class="form-control mb-2" name="category" required>
                         <option disabled selected>Category</option>
                         <option value="1">FrontEnd</option>
