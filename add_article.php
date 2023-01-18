@@ -8,6 +8,9 @@ $admin = new Admin;
 if (isset($_POST['save'])) {
     $admin->add_article($_POST['title'], $_POST['author'], $_POST['category'], $_POST['content'], $_POST['pubDate']);
 }
+if (isset($_POST['add'])) {
+    
+}
 ?>
 
 <!DOCTYPE html>
@@ -82,7 +85,7 @@ if (isset($_POST['save'])) {
                     </script>
                     <div class="d-flex">
                     <input type="submit" name="save" value="Save" class="form-control btn btn-danger mt-2" name="add_article">
-                    <input type="submit" value="Add Article" class="form-control btn btn-success mt-2" name="add_article">
+                    <input type="submit" value="Add Article" class="form-control btn btn-success mt-2" name="add">
                     <div>
                 </form>
             </div>
