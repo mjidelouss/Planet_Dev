@@ -1,9 +1,9 @@
 <?php
 include "includes/autoloader.php";
 session_start();
-// if (!isset($_SESSION['connected'])) {
-//     header("location: sign_in.php");
-// }
+if (!isset($_SESSION['user'])) {
+    header("location: index.php");
+}
 $admin = new Admin;
 if (isset($_POST['save'])) {
     $admin->add_article($_POST['title'], $_POST['author'], $_POST['category'], $_POST['content'], $_POST['pubDate']);
@@ -12,7 +12,7 @@ if (isset($_POST['delid'])) {
     $admin->delete_article($_POST['delid']);
 }
 if (isset($_POST['update'])) {
-    $admin->update_article($_POST['newTitle'], $_POST['newAuthor'], $_POST['newContent'], $_POST['newCategory'], $_POST['newPubDate']);
+    $admin->update_article($_POST['articleId'], $_POST['newTitle'], $_POST['newAuthor'], $_POST['newContent'], $_POST['newCategory'], $_POST['newPubDate']);
 }
 ?>
 
@@ -68,6 +68,10 @@ if (isset($_POST['update'])) {
                     <div class="col-lg-2 col-md-4 col-sm-5">
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
+                            <?php
+                                $totalArticles = $admin->article_status();
+                                echo '<h3 class="fs-2">'.$totalArticles.'</h3>';
+                            ?>
                                 <p class="fs-5 text-black">Articles</p>
                             </div>
                             <i class="fas fa-newspaper fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
@@ -76,7 +80,11 @@ if (isset($_POST['update'])) {
                     <div class="col-lg-2 col-md-4 col-sm-5">
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <p class="fs-5 text-black">Users</p>
+                            <?php
+                                $totalUsers = $admin->users_status();
+                                echo '<h3 class="fs-2">'.$totalUsers.'</h3>';
+                            ?>
+                            <p class="fs-5 text-black">Users</p>
                             </div>
                             <i class="fas fa-users fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
                         </div>
@@ -84,7 +92,11 @@ if (isset($_POST['update'])) {
                     <div class="col-lg-2 col-md-4 col-sm-5">
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <p class="fs-5 text-black">Authors</p>
+                            <?php
+                                $totalAuthors = $admin->authors_status();
+                                echo '<h3 class="fs-2">'.$totalAuthors.'</h3>';
+                            ?>
+                            <p class="fs-5 text-black">Authors</p>
                             </div>
                             <i class="fa fa-people-group fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
                         </div>
@@ -146,7 +158,7 @@ if (isset($_POST['update'])) {
                                     <option value="5">DevOps</option>
                                     <option value="6">Big Data</option>
                                     <option value="7">UI & UX</option>
-                                    <option value="8">WEB</option>
+                                    <option value="8">Web</option>
                                     <option value="9">Cyber Security</option>
                                 </select>
                             </div>
@@ -196,15 +208,15 @@ if (isset($_POST['update'])) {
                             <label class="col-form-label text-black">Category</label>
                             <select class="form-select" id="newCategory" name="newCategory">
                                 <option disabled selected>Please select</option>
-                                <option value="1">FrontEnd</option>
-                                <option value="2">BackEnd</option>
-                                <option value="3">Network</option>
-                                <option value="4">Cloud</option>
-                                <option value="5">DevOps</option>
-                                <option value="6">Big Data</option>
-                                <option value="7">UI & UX</option>
-                                <option value="8">WEB</option>
-                                <option value="9">Cyber Security</option>
+                                <option value="FrontEnd">FrontEnd</option>
+                                <option value="BackEnd">BackEnd</option>
+                                <option value="Network">Network</option>
+                                <option value="Cloud">Cloud</option>
+                                <option value="DevOps">DevOps</option>
+                                <option value="Big Data">Big Data</option>
+                                <option value="UI & UX">UI & UX</option>
+                                <option value="Web">Web</option>
+                                <option value="Cyber Security">Cyber Security</option>
                             </select>
                         </div>
                         <div class="">
@@ -212,21 +224,17 @@ if (isset($_POST['update'])) {
                             <input type="date" class="form-control" id="newPubDate" name="newPubDate" />
                         </div>
                         <div class="">
-                                <label class="col-form-label text-black">Content</label>
-                                <textarea name="content" class="form-control" id="newContent" required></textarea>
-                            </div>
-                    </div>
-                    <div class="modal-footer" style="border: none">
-                        <button type="button" class="btn btn-primary border rounded-pill" data-bs-dismiss="modal">
-                            Cancel
-                        </button>
-                        <button type="submit" id="update" name="update" class="btn btn-success rounded-pill text-white">
-                            Update
-                        </button>
-                </form>
+                            <label class="col-form-label text-black">Content</label>
+                            <textarea class="form-control" id="newContent" name="newContent"></textarea>
+                        </div>
+                        </div>
+                            <div class="modal-footer" style="border: none">
+                            <button type="button" class="btn btn-primary border rounded-pill" data-bs-dismiss="modal">Cancel</button>
+                            <button type="submit" id="update" name="update" class="btn btn-success rounded-pill text-white">Update</button>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
     </div>
 </body>
 <!-- ================== BEGIN core-js ================== -->
