@@ -1,4 +1,4 @@
-// Update & delete model variables
+// Update Model variables
 const updateTitle = document.getElementById("newTitle");
 const updateAuthor = document.getElementById("newAuthor");
 const updateContent = document.getElementById("newContent");
@@ -15,7 +15,7 @@ function initArt(index) {
   updateContent.value = arr[2];
   updateCategory.value = arr[3];
   updateDatePub.value = arr[4];
-  bookId.value = index;
+  articleId.value = index;
 }
 
 // resetBookForm Function resets the forms inputs

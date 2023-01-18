@@ -15,7 +15,7 @@ class Article {
     }
 
     public function display_articles() {
-        $sql="SELECT article.id, article.title, article.author, article.content, category.category AS category , article.published_date FROM  article, category WHERE category.id = article.category_id";
+        $sql="SELECT article.id, article.title, article.author, article.content, category.category AS Category , article.published_date FROM  article, category WHERE category.id = article.category_id";
         $stmt = $this->db->connect()->query($sql);
         while ($row = $stmt->fetch()) 
         {
@@ -23,7 +23,7 @@ class Article {
             $this->title = "".$row["title"]."";
             $this->author = "".$row["author"]."";
             $this->content = "".$row["content"]."";
-            $this->category = "".$row["category"]."";
+            $this->category = "".$row["Category"]."";
             $this->date = "".$row["published_date"]."";
             echo '
                 <tr>

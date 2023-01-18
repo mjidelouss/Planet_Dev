@@ -25,14 +25,13 @@ if (isset($_POST['update'])) {
     <meta name="author" content="" />
     <title>Dashboard</title>
     <!-- ================== BEGIN core-css ================== -->
+    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link href="assets/css/default/app.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"
-        integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link href="assets/css/style.css" rel="stylesheet" />
-    <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <!-- ================== END core-css ================== -->
 </head>
 
@@ -69,7 +68,7 @@ if (isset($_POST['update'])) {
                     <div class="col-lg-2 col-md-4 col-sm-5">
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <p class="fs-5 text-black">Total Articles</p>
+                                <p class="fs-5 text-black">Articles</p>
                             </div>
                             <i class="fas fa-newspaper fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
                         </div>
@@ -77,7 +76,7 @@ if (isset($_POST['update'])) {
                     <div class="col-lg-2 col-md-4 col-sm-5">
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <p class="fs-5 text-black">Total Users</p>
+                                <p class="fs-5 text-black">Users</p>
                             </div>
                             <i class="fas fa-users fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
                         </div>
@@ -85,9 +84,9 @@ if (isset($_POST['update'])) {
                     <div class="col-lg-2 col-md-4 col-sm-5">
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
-                                <p class="fs-5 text-black">Total Authors</p>
+                                <p class="fs-5 text-black">Authors</p>
                             </div>
-                            <i class="fas fa-cubes fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
+                            <i class="fa fa-people-group fs-1 text-info border rounded-full p-3 ms-1" style="background-color: white;"></i>
                         </div>
                     </div>
                 </div>
@@ -231,7 +230,8 @@ if (isset($_POST['update'])) {
     </div>
 </body>
 <!-- ================== BEGIN core-js ================== -->
-<script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="assets/js/scripts.js"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>

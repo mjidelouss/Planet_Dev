@@ -1,6 +1,10 @@
 <?php
 require_once('includes/autoloader.php');
 session_start();
+$user = new User;
+if (isset($_POST['login'])) {
+  $user->login($_POST['email'], $_POST['password']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -42,26 +46,26 @@ session_start();
      <div class="col-lg-6 mb-5 mb-lg-0 position-relative">
        <div class="card bg-glass">
          <div class="card-body px-4 py-5 px-md-5">
-           <form>
+           <form action="" method="POST">
            <div class="d-flex align-items-center mb-3 pb-1">
                     <i class="fas fa-cubes fa-2x me-3 fs-1" style="color: #a2d2ff;"></i>
                     <span class="h1 fw-bold mb-0">Planet Dev</span>
             </div>
              <!-- Email input -->
              <div class="form-outline mb-4">
-               <input type="email" id="form3Example3" class="form-control" />
+               <input type="email" name="email" class="form-control" required/>
                <label class="form-label" style="margin-top: 0.3rem;">Email address</label>
              </div>
 
              <!-- Password input -->
              <div class="form-outline mb-4">
-               <input type="password" id="form3Example4" class="form-control" />
+               <input type="password" name="password" class="form-control" required/>
                <label class="form-label" style="margin-top: 0.3rem;">Password</label>
              </div>
 
              <!-- Submit button -->
              <div class="d-flex justify-content-center">
-             <button type="submit" class="btn btn-primary btn-block mb-4 w-25">
+             <button type="submit" name="login" class="btn btn-primary btn-block mb-4 w-25">
                Login
              </button>
             </div>
