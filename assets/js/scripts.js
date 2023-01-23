@@ -1,7 +1,6 @@
 // Update Model variables
 const updateTitle = document.getElementById("newTitle");
 const updateAuthor = document.getElementById("newAuthor");
-const updateContent = document.getElementById("newContent");
 const updateCategory = document.getElementById("newCategory");
 const updateDatePub = document.getElementById("newPubDate");
 const articleId = document.getElementById("articleId");
@@ -12,7 +11,7 @@ function initArt(index) {
   let arr = dataInfo.split(",");
   updateTitle.value = arr[0];
   updateAuthor.value = arr[1];
-  updateContent.value = arr[2];
+  CKEDITOR.instances['newContent'].setData(arr[2]);
   updateCategory.value = arr[3];
   updateDatePub.value = arr[4];
   articleId.value = index;
@@ -21,13 +20,45 @@ function initArt(index) {
 // resetBookForm Function resets the forms inputs
 function resetArticleForm() {
     document.getElementById("form-article").reset();
-  }
-  // wrapside function to control the show & hide of sidebar
-  function wrapside() {
-    let side = document.querySelector("#wrapper");
-    side.classList.toggle("toggled");
-  }
+}
+
+// wrapside function to control the show & hide of sidebar
+function wrapside() {
+  let side = document.querySelector("#wrapper");
+  side.classList.toggle("toggled");
+}
   
-  $(document).ready(function () {
+$(document).ready(function () {
     $('#data-table').DataTable();
-  });
+});
+
+$(document).ready(function() {
+    $(document).on('click', '.delete-article', function() {
+        $(this).closest('.dynamic-form').remove();
+    });
+});
+
+
+function addArticleForm(){
+    var form = `<div class="dynamic-form">
+    <input type="text" placeholder="Title" class="form-control mb-2" name="title[]" required>
+    <input type="text" placeholder="Author" class="form-control mb-2" name="author[]" required />
+    <select class="form-control mb-2" name="category[]" required>
+        <option disabled selected>Category</option>
+        <option value="1">FrontEnd</option>
+        <option value="2">BackEnd</option>
+        <option value="3">Network</option>
+        <option value="4">Cloud</option>
+        <option value="5">DevOps</option>
+        <option value="6">Big Data</option>
+        <option value="7">UI & UX</option>
+        <option value="8">Web</option>
+        <option value="9">Cyber Security</option>
+    </select>
+    <input type="date" placeholder="Published Date" class="form-control mb-2" name="pubDate[]" required />
+    <textarea type="text" placeholder="Content" class="form-control" row="3" name="content[]"></textarea>
+    <input type="button" value="Delete Article" class="form-control btn btn-danger mt-2 p-3 delete-article">
+</div>`;
+    $("#form-container").append(form);
+    CKEDITOR.replace('content[]');
+}

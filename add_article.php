@@ -6,10 +6,14 @@ if (!isset($_SESSION['user'])) {
 }
 $admin = new Admin;
 if (isset($_POST['save'])) {
-    $admin->add_article($_POST['title'], $_POST['author'], $_POST['category'], $_POST['content'], $_POST['pubDate']);
-}
-if (isset($_POST['add'])) {
-    
+    $titles = $_POST['title'];
+    $authors = $_POST['author'];
+    $categories = $_POST['category'];
+    $dates = $_POST['pubDate'];
+    $contents = $_POST['content'];
+    for($i = 0; $i < count($titles); $i++) {
+        $admin->add_article($titles[$i], $authors[$i], $categories[$i], $contents[$i], $dates[$i]);
+    }
 }
 ?>
 
@@ -53,20 +57,27 @@ if (isset($_POST['add'])) {
         </div>
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg bg-transparent py-4 px-4">
+        <nav class="navbar navbar-expand-lg bg-transparent py-4 px-4 d-flex justify-content-between">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-bars primary-text fs-4 me-3" style="color: black; cursor: pointer;"
                         id="controlPanel" onclick="wrapside()"></i>
-                    <h2 class="fs-2 m-0 text-black">Dashboard</h2>
+                    <h2 class="fs-2 m-0 text-black">Add Article</h2>
                 </div>
+                <div class="d-flex">
+                <div class="">
+                <p class="" style="margin-top: 0.3rem;">Today's Date</p>
+                <?php echo '<h4 class="fw-bold" style="margin-top: -1rem;">'.date("Y-m-d").'</h4>'?>
+                 </div>
+                 <div><img class="rounded p-2 border border-secondary ms-2" src="./assets/img/calendar.svg" alt=""></div>
+               </div>
             </nav>
             <!-- Start -->
             <div class="conatiner-fluid blog">
-                <h4 class="text-center">Add Article</h4>
                 <form action="" method="POST">
-                    <input type="text" placeholder="Title" class="form-control mb-2" name="title" required>
-                    <input type="text" placeholder="Author" class="form-control mb-2" name="author" required />
-                    <select class="form-control mb-2" name="category" required>
+                <div id="form-container" style="margin-bottom: 1rem;"></div>
+                    <input type="text" placeholder="Title" class="form-control mb-2" name="title[]" required>
+                    <input type="text" placeholder="Author" class="form-control mb-2" name="author[]" required />
+                    <select class="form-control mb-2" name="category[]" required>
                         <option disabled selected>Category</option>
                         <option value="1">FrontEnd</option>
                         <option value="2">BackEnd</option>
@@ -78,14 +89,14 @@ if (isset($_POST['add'])) {
                         <option value="8">Web</option>
                         <option value="9">Cyber Security</option>
                     </select>
-                    <input type="date" placeholder="Published Date..." class="form-control mb-2" name="pubDate" required />
-                    <textarea type="text" placeholder="Content..." class="form-control" row="3" name="content"></textarea>
+                    <input type="date" placeholder="Published Date" class="form-control mb-2" name="pubDate[]" required />
+                    <textarea type="text" placeholder="Content" class="form-control" row="3" name="content[]"></textarea>
                     <script>
-                        CKEDITOR.replace( 'content' );
+                        CKEDITOR.replace( 'content[]' );
                     </script>
                     <div class="d-flex">
-                    <input type="submit" name="save" value="Save" class="form-control btn btn-danger mt-2" name="add_article">
-                    <input type="submit" value="Add Article" class="form-control btn btn-success mt-2" name="add">
+                    <input type="submit" id="save-article" name="save" value="Save" class="form-control btn btn-danger mt-2 p-3" name="add_article">
+                    <input type="submit" value="Add Article" class="form-control btn btn-success mt-2 p-3" name="add_article" onclick="addArticleForm()">
                     <div>
                 </form>
             </div>
