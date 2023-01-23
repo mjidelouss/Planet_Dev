@@ -32,6 +32,7 @@ if (isset($_POST['remove'])) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" />
     <link href="assets/css/style.css" rel="stylesheet" />
+    <script src="https://cdn.ckeditor.com/4.20.1/standard/ckeditor.js"></script>
     <!-- ================== END core-css ================== -->
 </head>
 
@@ -55,12 +56,27 @@ if (isset($_POST['remove'])) {
         </div>
         <!-- Page Content -->
         <div id="page-content-wrapper">
-            <nav class="navbar navbar-expand-lg bg-transparent py-4 px-4">
+        <?php
+        if (isset($_SESSION['crud'])) {
+            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>' . $_SESSION['crud'] . '</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>';
+            unset($_SESSION['crud']);
+        }?>
+            <nav class="navbar navbar-expand-lg bg-transparent py-4 px-4 d-flex justify-content-between">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-bars primary-text fs-4 me-3" style="color: black; cursor: pointer;"
                         id="controlPanel" onclick="wrapside()"></i>
                     <h2 class="fs-2 m-0 text-black">Dashboard</h2>
                 </div>
+                <div class="d-flex">
+                <div class="">
+                <p class="" style="margin-top: 0.3rem;">Today's Date</p>
+                <?php echo '<h4 class="fw-bold" style="margin-top: -1rem;">'.date("Y-m-d").'</h4>'?>
+                 </div>
+                 <div><img class="rounded p-2 border border-secondary ms-2" src="./assets/img/calendar.svg" alt=""></div>
+               </div>
             </nav>
             <!-- Welcome user Message -->
             <div class="container-fluid px-4">
@@ -106,7 +122,7 @@ if (isset($_POST['remove'])) {
                     <h3 class="fs-4 text-black">Available Articles</h3>
                 </div>
                     <div class="col table-responsive">
-                        <table id="data-table" class="table table-bordered bg-white rounded shadow-sm table-hover">
+                        <table id="data-table" class="table bg-white rounded shadow-sm table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col"># Id</th>
@@ -153,84 +169,28 @@ if (isset($_POST['remove'])) {
                     </div>
                 </div>
             </div>
-
-        <!-- Article MODAL -->
-        <div class="modal fade" id="modal-article">
-            <div class="modal-dialog">
-                <div class="modal-content" style="background-image: url(./assets/img/book.jpg);">
-                    <form action="" method="POST" id="form-article">
-                        <div class="modal-header d-flex justify-content-center" style="border: none;">
-                            <img src="./assets/img/article.png" width="120" height="100" alt="">
-                        </div>
-                        <div class="modal-body">
-                            <div class="" id="">
-                                <label class="col-form-label text-black">Title</label>
-                                <input type="text" class="form-control" id="title" name="title" required />
-                            </div>
-                            <div class="" id="">
-                                <label class="col-form-label text-black">Author</label>
-                                <input type="text" class="form-control" id="author" name="author" required />
-                            </div>
-                            <div class="">
-                                <label class="col-form-label text-black">Category</label>
-                                <select class="form-select" id="category" name="category" required>
-                                    <option disabled selected>Please select</option>
-                                    <option value="1">FrontEnd</option>
-                                    <option value="2">BackEnd</option>
-                                    <option value="3">Network</option>
-                                    <option value="4">Cloud</option>
-                                    <option value="5">DevOps</option>
-                                    <option value="6">Big Data</option>
-                                    <option value="7">UI & UX</option>
-                                    <option value="8">Web</option>
-                                    <option value="9">Cyber Security</option>
-                                </select>
-                            </div>
-                            <div class="">
-                                <label class="col-form-label text-black">Published Date</label>
-                                <input type="date" class="form-control" id="pubDate" name="pubDate" required />
-                            </div>
-                            <div class="">
-                                <label class="col-form-label text-black">Content</label>
-                                <textarea name="content" class="form-control" id="content" required></textarea>
-                            </div>
-                        </div>
-                        <div class="modal-footer" style="border: none">
-                            <button type="button" class="btn btn-primary border rounded-pill" data-bs-dismiss="modal">
-                                Cancel
-                            </button>
-                            <button type="submit" class="btn btn-danger rounded-pill text-white" name="save" id="save">
-                                Save
-                            </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <!-- UPDATE & DELETE BOOK MODAL -->
     <div class="modal fade" id="modal-updateArt">
-        <div class="modal-dialog">
-            <div class="modal-content" style="background-image: url(./assets/img/book.jpg);">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
                 <form action="" method="POST">
                     <div class="modal-header d-flex justify-content-center" style="
               border: none;
             ">
-                        <img src="./assets/img/upart.png" width="90" height="100" alt="">
                     </div>
                     <div class="modal-body">
                         <div class="" id="">
                             <input type="text" id="articleId" name="articleId" style="display: none">
                             <label class="col-form-label text-black">Title</label>
-                            <input type="text" class="form-control" id="newTitle" name="newTitle" />
+                            <input type="text" class="form-control mb-2" id="newTitle" name="newTitle" />
                         </div>
                         <div class="" id="">
                             <label class="col-form-label text-black">Author</label>
-                            <input type="text" class="form-control" id="newAuthor" name="newAuthor" />
+                            <input type="text" class="form-control mb-2" id="newAuthor" name="newAuthor" />
                         </div>
                         <div class="">
                             <label class="col-form-label text-black">Category</label>
-                            <select class="form-select" id="newCategory" name="newCategory">
+                            <select class="form-control mb-2" id="newCategory" name="newCategory">
                                 <option disabled selected>Please select</option>
                                 <option value="FrontEnd">FrontEnd</option>
                                 <option value="BackEnd">BackEnd</option>
@@ -245,11 +205,13 @@ if (isset($_POST['remove'])) {
                         </div>
                         <div class="">
                             <label class="col-form-label text-black">Published Date</label>
-                            <input type="date" class="form-control" id="newPubDate" name="newPubDate" />
+                            <input type="date" class="form-control mb-2" id="newPubDate" name="newPubDate" />
                         </div>
                         <div class="">
-                            <label class="col-form-label text-black">Content</label>
                             <textarea class="form-control" id="newContent" name="newContent"></textarea>
+                            <script>
+                                CKEDITOR.replace( 'newContent' );
+                            </script>
                         </div>
                         </div>
                             <div class="modal-footer" style="border: none">

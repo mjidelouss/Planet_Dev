@@ -10,17 +10,19 @@ class Admin  extends User {
 
     public function add_article($title, $author, $category, $content, $date)
     {
+        session_start();
         $sql = "INSERT INTO article (title, author, content, category_id, published_date) values ('$title', '$author', '$content', '$category', '$date')";
         $stmt = $this->db->connect()->query($sql);
         header('location: dashboard.php');
-        // $_SESSION['crud'] = "Book Added Successfully!!";
+        $_SESSION['crud'] = "Article Added Successfully!!";
     }
     public function delete_article($id) 
     {
+        session_start();
         $sql = "DELETE FROM article WHERE id = '$id'";
         $stmt = $this->db->connect()->query($sql);
         header('location: dashboard.php');
-        // $_SESSION['crud'] = "Book Deleted Successfully!!";
+        $_SESSION['crud'] = "Article Deleted Successfully!!";
     }
     public function update_article($id, $title, $author, $content, $category, $date)
     {
@@ -38,7 +40,7 @@ class Admin  extends User {
         $sql = "UPDATE article SET id = $id, title = '$title', author = '$author', content = '$content', category_id = '$categoryId', published_date = '$date' WHERE id = $id";
         $stmt = $this->db->connect()->query($sql);
         header('location: dashboard.php');
-        // $_SESSION['crud'] = "Book Updated Successfully!!";
+        $_SESSION['crud'] = "Article Updated Successfully!!";
     }
 
     public function article_status()

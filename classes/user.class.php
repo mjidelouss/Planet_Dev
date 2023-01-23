@@ -26,7 +26,7 @@ class User
             header("location: dashboard.php");
           }
       } else {
-          // $_SESSION['message'] = "Wrong Credentials!!";
+          $_SESSION['message'] = "Wrong Credentials!!";
           header('location: index.php');
       }
     }
