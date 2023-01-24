@@ -21,4 +21,10 @@ class Article {
         $stmt = $this->db->connect()->query($sql);
         return $stmt;
     }
+
+    public function display_categorys() {
+        $sql="SELECT * FROM category";
+        $stmt = $this->db->connect()->query($sql);
+        return $stmt;
+    }
 }

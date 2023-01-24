@@ -1,4 +1,5 @@
 <?php
+session_start();
 /* 
     instead of including multiple files on each page
     spl_autoload_register will include appropriate 

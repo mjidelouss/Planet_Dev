@@ -1,6 +1,6 @@
 <?php
 require_once('includes/autoloader.php');
-session_start();
+
 $user = new User;
 if (isset($_POST['login'])) {
   $user->login($_POST['email'], $_POST['password']);

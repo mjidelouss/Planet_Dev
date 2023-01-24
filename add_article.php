@@ -1,6 +1,6 @@
 <?php
 include "includes/autoloader.php";
-session_start();
+
 if (!isset($_SESSION['user'])) {
     header("location: index.php");
 }
@@ -45,11 +45,11 @@ if (isset($_POST['save'])) {
                     class=""></i>Planet <span style="color: hsl(218, 81%, 75%)">DEV</span>
             </div>
             <div class="list-group list-group-flush my-3">
-                <a href="./dashboard.php" class="list-group-item list-group-item-action bg-transparent active"><i
+                <a href="./dashboard.php" class="list-group-item list-group-item-action bg-transparent"><i
                         class="fas fa-tachometer-alt me-2"></i>Dashboard</a>
-                <a href="./add_article.php" class="list-group-item list-group-item-action bg-transparent second-text text-black fw-bold"
+                <a href="./add_article.php" class="list-group-item list-group-item-action bg-transparent second-text fw-bold active"
                     onclick="resetArticleForm()" data-bs-toggle="modal" data-bs-target="#modal-article"><i
-                        class="fa fa-plus me-2 text-black"></i>Add Article</a>
+                        class="fa fa-plus me-2"></i>Add Article</a>
                 <a href="./logout.php"
                     class="list-group-item list-group-item-action bg-transparent second-text fw-bold text-danger"><i
                         class="fas fa-power-off me-2 text-danger"></i>Logout</a>
@@ -79,18 +79,18 @@ if (isset($_POST['save'])) {
                     <input type="text" placeholder="Author" class="form-control mb-2" name="author[]" required />
                     <select class="form-control mb-2" name="category[]" required>
                         <option disabled selected>Category</option>
-                        <option value="1">FrontEnd</option>
-                        <option value="2">BackEnd</option>
-                        <option value="3">Network</option>
-                        <option value="4">Cloud</option>
-                        <option value="5">DevOps</option>
-                        <option value="6">Big Data</option>
-                        <option value="7">UI & UX</option>
-                        <option value="8">Web</option>
-                        <option value="9">Cyber Security</option>
+                        <?php
+                            $article = new Article;
+                            $stmt = $article->display_categorys();
+                            $i = 1;
+                            while ($row = $stmt->fetch()) 
+                            {
+                                echo '<option value="'.$i.'">'.$row['category'].'</option>';
+                                $i++;
+                            }
+                        ?>
                     </select>
-                    <input type="date" placeholder="Published Date" class="form-control mb-2" name="pubDate[]" required />
-                    <textarea type="text" placeholder="Content" class="form-control" row="3" name="content[]"></textarea>
+                    <textarea type="text" placeholder="Content" class="form-control ckeditor" row="3" name="content[]"></textarea>
                     <script>
                         CKEDITOR.replace( 'content[]' );
                     </script>

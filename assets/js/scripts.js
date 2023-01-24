@@ -2,7 +2,6 @@
 const updateTitle = document.getElementById("newTitle");
 const updateAuthor = document.getElementById("newAuthor");
 const updateCategory = document.getElementById("newCategory");
-const updateDatePub = document.getElementById("newPubDate");
 const articleId = document.getElementById("articleId");
 
 // initializeBook function fills the update book model inputs
@@ -13,7 +12,6 @@ function initArt(index) {
   updateAuthor.value = arr[1];
   CKEDITOR.instances['newContent'].setData(arr[2]);
   updateCategory.value = arr[3];
-  updateDatePub.value = arr[4];
   articleId.value = index;
 }
 
@@ -38,7 +36,7 @@ $(document).ready(function() {
     });
 });
 
-
+var count = 0;
 function addArticleForm(){
     var form = `<div class="dynamic-form">
     <input type="text" placeholder="Title" class="form-control mb-2" name="title[]" required>
@@ -55,10 +53,11 @@ function addArticleForm(){
         <option value="8">Web</option>
         <option value="9">Cyber Security</option>
     </select>
-    <input type="date" placeholder="Published Date" class="form-control mb-2" name="pubDate[]" required />
-    <textarea type="text" placeholder="Content" class="form-control" row="3" name="content[]"></textarea>
+    <textarea type="text" placeholder="Content" class="form-control ckeditor" row="3" name="content[]"></textarea>
     <input type="button" value="Delete Article" class="form-control btn btn-danger mt-2 p-3 delete-article">
 </div>`;
     $("#form-container").append(form);
-    CKEDITOR.replace('content[]');
+    var textareas = document.querySelectorAll("textarea[name='content[]']");
+    CKEDITOR.replace(textareas[count]);
+    count++;
 }

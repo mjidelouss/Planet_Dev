@@ -1,15 +1,16 @@
 <?php
 include "includes/autoloader.php";
-session_start();
+
 if (!isset($_SESSION['user'])) {
     header("location: index.php");
 }
+
 $admin = new Admin;
 if (isset($_POST['save'])) {
-    $admin->add_article($_POST['title'], $_POST['author'], $_POST['category'], $_POST['content'], $_POST['pubDate']);
+    $admin->add_article($_POST['title'], $_POST['author'], $_POST['category'], $_POST['content']);
 }
 if (isset($_POST['update'])) {
-    $admin->update_article($_POST['articleId'], $_POST['newTitle'], $_POST['newAuthor'], $_POST['newContent'], $_POST['newCategory'], $_POST['newPubDate']);
+    $admin->update_article($_POST['articleId'], $_POST['newTitle'], $_POST['newAuthor'], $_POST['newContent'], $_POST['newCategory']);
 }
 if (isset($_POST['remove'])) {
     $admin->delete_article($_POST['removee']);
@@ -25,6 +26,7 @@ if (isset($_POST['remove'])) {
     <meta name="author" content="" />
     <title>Dashboard</title>
     <!-- ================== BEGIN core-css ================== -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <link href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.min.css" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
@@ -56,14 +58,6 @@ if (isset($_POST['remove'])) {
         </div>
         <!-- Page Content -->
         <div id="page-content-wrapper">
-        <?php
-        if (isset($_SESSION['crud'])) {
-            echo '<div class="alert alert-success alert-dismissible fade show" role="alert">
-            <strong>' . $_SESSION['crud'] . '</strong>
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>';
-            unset($_SESSION['crud']);
-        }?>
             <nav class="navbar navbar-expand-lg bg-transparent py-4 px-4 d-flex justify-content-between">
                 <div class="d-flex align-items-center">
                     <i class="fas fa-bars primary-text fs-4 me-3" style="color: black; cursor: pointer;"
@@ -204,10 +198,6 @@ if (isset($_POST['remove'])) {
                             </select>
                         </div>
                         <div class="">
-                            <label class="col-form-label text-black">Published Date</label>
-                            <input type="date" class="form-control mb-2" id="newPubDate" name="newPubDate" />
-                        </div>
-                        <div class="">
                             <textarea class="form-control" id="newContent" name="newContent"></textarea>
                             <script>
                                 CKEDITOR.replace( 'newContent' );
@@ -224,7 +214,7 @@ if (isset($_POST['remove'])) {
     </div>
 </body>
 <!-- ================== BEGIN core-js ================== -->
-<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 <script src="assets/js/scripts.js"></script>

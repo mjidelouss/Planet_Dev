@@ -8,25 +8,23 @@ class Admin  extends User {
         $this->db = new DbConnection;
     }
 
-    public function add_article($title, $author, $category, $content, $date)
+    public function add_article($title, $author, $category, $content)
     {
-        session_start();
+        $date = date("Y-m-d");
         $sql = "INSERT INTO article (title, author, content, category_id, published_date) values ('$title', '$author', '$content', '$category', '$date')";
         $stmt = $this->db->connect()->query($sql);
         header('location: dashboard.php');
-        $_SESSION['crud'] = "Article Added Successfully!!";
     }
     public function delete_article($id) 
     {
-        session_start();
         $sql = "DELETE FROM article WHERE id = '$id'";
         $stmt = $this->db->connect()->query($sql);
         header('location: dashboard.php');
-        $_SESSION['crud'] = "Article Deleted Successfully!!";
     }
-    public function update_article($id, $title, $author, $content, $category, $date)
+    public function update_article($id, $title, $author, $content, $category)
     {
         $categoryId = '';
+        $date = date("Y-m-d");
         
         if ($category == "FrontEnd") {$categoryId = 1;}
         if ($category == "BackEnd") {$categoryId = 2;}
@@ -40,7 +38,6 @@ class Admin  extends User {
         $sql = "UPDATE article SET id = $id, title = '$title', author = '$author', content = '$content', category_id = '$categoryId', published_date = '$date' WHERE id = $id";
         $stmt = $this->db->connect()->query($sql);
         header('location: dashboard.php');
-        $_SESSION['crud'] = "Article Updated Successfully!!";
     }
 
     public function article_status()
