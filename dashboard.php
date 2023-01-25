@@ -112,17 +112,44 @@ if (isset($_POST['remove'])) {
                         </div>
                     </div>
                 </div>
-                <div class="row my-5">
+                <div class="row my-4">
                     <h3 class="fs-4 text-black">Available Articles</h3>
                 </div>
-                    <div class="col table-responsive">
+                <div class="mb-3">
+                <form action="" method="POST">
+                <div class="input-group d-flex">
+                    <div class="form-outline">
+                        <select class="form-control" id="filter" name="filter" style="width: 12rem;">
+                        <option value="0">All Categories</option>
+                        <?php
+                            $article = new Article;
+                            $stmt = $article->display_categorys();
+                            $i = 1;
+                            while ($row = $stmt->fetch()) 
+                            {    
+                                if ($_POST['filter'] == $i) {
+                                    echo '<option value="'.$i.'" selected>'.$row['category'].'</option>';
+                                } else {
+                                    echo '<option value="'.$i.'">'.$row['category'].'</option>';
+                                }
+                                $i++;
+                            }
+                        ?>
+                        </select>
+                    </div>
+                    <button type="submit" name="search" class="btn btn-primary rounded ms-2">
+                        <i class="fas fa-search"></i>
+                    </button>
+                  </form>
+                </div>
+                </div>
+                    <div class="col table-responsive mb-2">
                         <table id="data-table" class="table bg-white rounded shadow-sm table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col"># Id</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">Author</th>
-                                    <th scope="col">Content</th>
                                     <th scope="col">Category</th>
                                     <th scope="col">Published Date</th>
                                     <th scope="col">Edit</th>
@@ -132,30 +159,36 @@ if (isset($_POST['remove'])) {
                             <tbody id="book-table">
                             <?php
                                 $article = new Article;
-                                $stmt = $article->display_articles();
+                                if (isset($_POST['search'])) {
+                                    if (!isset($_POST['filter'])) {
+                                        $_POST['filter'] = 0;
+                                    }
+                                    $stmt = $article->display_artiles_category($_POST['filter']);
+                                } else {
+                                    $stmt = $article->display_articles();
+                                }
                                 while ($row = $stmt->fetch()) 
                                 {
-                                    $article->id = "".$row["id"] ."";
-                                    $article->title = "".$row["title"]."";
-                                    $article->author = "".$row["author"]."";
-                                    $article->content = "".$row["content"]."";
-                                    $article->category = "".$row["category"]."";
-                                    $article->date = "".$row["published_date"]."";
-                                    echo '
+                                    $article->id = $row["id"];
+                                    $article->title = $row["title"];
+                                    $article->author = $row["author"];
+                                    $article->content = $row["content"];
+                                    $article->category = $row["category"];
+                                    $article->date = $row["published_date"];
+                                    ?>
                                         <tr>
-                                        <th scope="row">'.$article->id.'</th>
-                                        <td>'.$article->title.'</td>
-                                        <td>'.$article->author.'</td>
-                                        <td>'.$article->content.'</td>
-                                        <td>'.$article->category.'</td>
-                                        <td>'.$article->date.'</td>
-                                        <td><button data-info="'.$article->title.','.$article->author.','.$article->content.','.$article->category.','.$article->date.'" class="rounded" data-bs-toggle="modal" data-bs-target="#modal-updateArt" id="'.$article->id.'" onclick="initArt('.$article->id.')"><i class="bi bi-pencil-square" style="color: green;"></i></button></td>
+                                        <th scope="row"><?=$article->id?></th>
+                                        <td><?=$article->title?></td>
+                                        <td><?=$article->author?></td>
+                                        <td><?=$article->category?></td>
+                                        <td><?=$article->date?></td>
+                                        <td><button class="rounded" data-bs-toggle="modal" data-bs-target="#modal-updateArt" id="<?=$article->id?>" onclick="initArt(<?=$article->id?>, `<?=$article->title?>`,`<?=$article->author?>`,`<?=htmlentities($article->content)?>`,`<?=$article->category?>`)"><i class="bi bi-pencil-square" style="color: green;"></i></button></td>
                                         <form method="POST" action="">
-                                        <input type="hidden" name="removee" value="'.$article->id.'">
+                                        <input type="hidden" name="removee" value="<?=$article->id?>">
                                         <td><button name="remove" type="submit" class="rounded"><i class="bi bi-trash-fill" style="color: red;"></i></button></td>
                                         </form>
                                         </tr>
-                                    ';
+                                    <?php
                                 }
                             ?>
                             </tbody>

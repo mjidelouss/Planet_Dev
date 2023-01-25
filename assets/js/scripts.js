@@ -5,13 +5,11 @@ const updateCategory = document.getElementById("newCategory");
 const articleId = document.getElementById("articleId");
 
 // initializeBook function fills the update book model inputs
-function initArt(index) {
-  let dataInfo = document.getElementById(index).getAttribute("data-info");
-  let arr = dataInfo.split(",");
-  updateTitle.value = arr[0];
-  updateAuthor.value = arr[1];
-  CKEDITOR.instances['newContent'].setData(arr[2]);
-  updateCategory.value = arr[3];
+function initArt(index, title, author, content, category) {
+  updateTitle.value = title;
+  updateAuthor.value = author;
+  CKEDITOR.instances['newContent'].setData(content);
+  updateCategory.value = category;
   articleId.value = index;
 }
 
