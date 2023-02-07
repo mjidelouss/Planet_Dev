@@ -6,3 +6,4 @@ read Message
 git add .
 git status
 git commit -m "$Message"
+git push origin main
