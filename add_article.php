@@ -81,7 +81,7 @@ if (isset($_POST['save'])) {
                         <option disabled selected>Category</option>
                         <?php
                             $article = new Article;
-                            $stmt = $article->display_categorys();
+                            $stmt = $article->display_categories();
                             $i = 1;
                             while ($row = $stmt->fetch()) 
                             {

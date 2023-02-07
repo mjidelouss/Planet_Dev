@@ -15,7 +15,6 @@ class User
     // function to log user to his intended dashboard
     public function login($email, $password)
     {
-      // $this->regUser($email, $password);
       $sql = "SELECT id, role FROM adminusers WHERE email = '$email' AND password = '$password'";
       $stmt = $this->db->connect()->query($sql);
       $user = $stmt->fetch();

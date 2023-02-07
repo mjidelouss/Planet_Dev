@@ -79,7 +79,8 @@ if (isset($_POST['remove'])) {
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
                             <?php
-                                $totalArticles = $admin->article_status();
+                            $article = new Article;
+                                $totalArticles = $article->article_status();
                                 echo '<h3 class="fs-2">'.$totalArticles.'</h3>';
                             ?>
                                 <p class="fs-5 text-black">Articles</p>
@@ -91,7 +92,7 @@ if (isset($_POST['remove'])) {
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
                             <?php
-                                $totalUsers = $admin->users_status();
+                                $totalUsers = $article->users_status();
                                 echo '<h3 class="fs-2">'.$totalUsers.'</h3>';
                             ?>
                             <p class="fs-5 text-black">Users</p>
@@ -103,7 +104,7 @@ if (isset($_POST['remove'])) {
                         <div class="p-2 bg-white d-flex justify-content-around align-items-center rounded">
                             <div>
                             <?php
-                                $totalAuthors = $admin->authors_status();
+                                $totalAuthors = $article->authors_status();
                                 echo '<h3 class="fs-2">'.$totalAuthors.'</h3>';
                             ?>
                             <p class="fs-5 text-black">Authors</p>
@@ -123,7 +124,7 @@ if (isset($_POST['remove'])) {
                         <option value="0">All Categories</option>
                         <?php
                             $article = new Article;
-                            $stmt = $article->display_categorys();
+                            $stmt = $article->display_categories();
                             $i = 1;
                             while ($row = $stmt->fetch()) 
                             {    
@@ -163,7 +164,7 @@ if (isset($_POST['remove'])) {
                                     if (!isset($_POST['filter'])) {
                                         $_POST['filter'] = 0;
                                     }
-                                    $stmt = $article->display_artiles_category($_POST['filter']);
+                                    $stmt = $article->display_articles_category($_POST['filter']);
                                 } else {
                                     $stmt = $article->display_articles();
                                 }
